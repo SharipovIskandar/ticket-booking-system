@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -10,14 +9,14 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('event_id');
-            $table->dateTime('event_date');
-            $table->unsignedInteger('ticket_adult_price');
-            $table->unsignedInteger('ticket_adult_quantity');
-            $table->unsignedInteger('ticket_kid_price');
-            $table->unsignedInteger('ticket_kid_quantity');
+            $table->unsignedBigInteger('event_id');
+            $table->date('event_date');
+            $table->decimal('ticket_adult_price', 8, 2);
+            $table->integer('ticket_adult_quantity');
+            $table->decimal('ticket_kid_price', 8, 2);
+            $table->integer('ticket_kid_quantity');
             $table->string('barcode')->unique();
-            $table->unsignedInteger('equal_price');
+            $table->decimal('equal_price', 8, 2);
             $table->timestamps();
         });
     }
@@ -27,3 +26,4 @@ class CreateOrdersTable extends Migration
         Schema::dropIfExists('orders');
     }
 }
+
