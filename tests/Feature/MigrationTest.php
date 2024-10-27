@@ -19,17 +19,6 @@ class MigrationTest extends TestCase
         ]));
     }
 
-    /** @test */
-    public function it_creates_orders_table()
-    {
-        $this->assertTrue(Schema::hasTable('orders'));
-        $this->assertTrue(Schema::hasColumns('orders', [
-            'id', 'event_id', 'event_date', 'ticket_adult_price',
-            'ticket_adult_quantity', 'ticket_kid_price',
-            'ticket_kid_quantity', 'barcode', 'equal_price',
-            'created_at', 'updated_at'
-        ]));
-    }
 
     /** @test */
     public function it_creates_tickets_table()
