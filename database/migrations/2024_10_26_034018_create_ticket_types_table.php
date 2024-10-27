@@ -11,7 +11,7 @@ class CreateTicketTypesTable extends Migration
         Schema::create('ticket_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedInteger('price');
+            $table->decimal('price', 8, 2);
             $table->timestamps();
         });
     }
@@ -21,4 +21,5 @@ class CreateTicketTypesTable extends Migration
         Schema::dropIfExists('ticket_types');
     }
 }
+
 

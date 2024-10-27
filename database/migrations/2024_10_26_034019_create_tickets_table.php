@@ -13,6 +13,7 @@ class CreateTicketsTable extends Migration
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('ticket_type_id');
             $table->string('barcode')->unique();
+            $table->boolean('is_used')->default(false);
             $table->timestamps();
 
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
@@ -25,3 +26,4 @@ class CreateTicketsTable extends Migration
         Schema::dropIfExists('tickets');
     }
 }
+

@@ -11,14 +11,25 @@ class EventController extends Controller
     public function index()
     {
         $events = Event::all();
+
         return view('events.index', compact('events'));
     }
+
     public function show($id)
     {
-        $event = Event::findOrFail($id);
-        $ticketTypes = TicketType::all(); // Bilet turlarini olish
+        $event = Event::find($id);
+        $ticketTypes = TicketType::all();
+
+        if (!$event) {
+            return view('events.show', [
+                'event' => false,
+                'ticketTypes' => $ticketTypes
+            ]);
+        }
+
         return view('events.show', compact('event', 'ticketTypes'));
     }
+
 
 
     public function create()

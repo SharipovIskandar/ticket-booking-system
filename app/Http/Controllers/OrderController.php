@@ -22,20 +22,20 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'event_id' => 'required|integer|exists:events,id',
-            'event_date' => 'required|date',
-            'ticket_adult_price' => 'required|integer',
-            'ticket_adult_quantity' => 'required|integer',
-            'ticket_kid_price' => 'required|integer',
-            'ticket_kid_quantity' => 'required|integer',
-            'barcode' => 'required|string|unique:orders',
-            'equal_price' => 'required|integer',
+            'event_id' => 'required|exists:events,id',
+            'ticket_type_id' => 'required|exists:ticket_types,id',
+            'barcode' => 'required|string|unique:orders,barcode',
         ]);
 
-        Order::create($request->all());
+        $order = new Order();
+        $order->event_id = $request->event_id;
+        $order->ticket_type_id = $request->ticket_type_id;
+        $order->barcode = $request->barcode;
+        $order->save();
 
-        return redirect()->route('orders.index')->with('success', 'Order created successfully.');
+        return redirect()->back()->with('success', 'Buyurtma muvaffaqiyatli qo\'shildi');
     }
+
 
     public function show($id)
     {
