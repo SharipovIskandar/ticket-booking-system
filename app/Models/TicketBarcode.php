@@ -5,19 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TicketType extends Model
+class TicketBarcode extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'price',
-        'available_amount',
+        'ticket_id',
+        'barcode',
     ];
 
-    public function tickets()
+    public function ticket()
     {
-        return $this->hasMany(Ticket::class);
+        return $this->belongsTo(Ticket::class);
     }
 }
-
