@@ -29,21 +29,6 @@ class TicketPurchaseController extends Controller
         $ticketTypes = TicketType::all();
         return view('tickets.select-ticket', compact('events', 'ticketTypes'));
     }
-
-    public function confirmPurchase(Request $request)
-    {
-        $validated = $request->validate([
-            'event_id' => 'required|exists:events,id',
-            'ticket_type_id' => 'required|exists:ticket_types,id',
-            'ticket_count' => 'required|integer|min:1',
-        ]);
-
-        $event = Event::find($validated['event_id']);
-        $ticketType = TicketType::find($validated['ticket_type_id']);
-
-        return view('tickets.confirm-purchase', compact('event', 'ticketType', 'validated.ticket_count'));
-    }
-
     public function completePurchase(Request $request)
     {
         $validated = $request->validate([
@@ -97,7 +82,7 @@ class TicketPurchaseController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('buy-ticket.select')->with('success', 'Билет успешно куплен. Бар кодлар generatsiya qilindi.');
+            return redirect()->route('buy-ticket.select')->with('success', 'Билет успешно куплен.');
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error('Ошибка при покупке билета: ' . $e->getMessage());
@@ -137,11 +122,12 @@ class TicketPurchaseController extends Controller
             ]);
 
             $ticketType->decrement('available_amount', $validated['ticket_count']);
+            $event = Event::find($validated['event_id']);
+            $event->decrement('ticket_count', $validated['ticket_count']);
 
             $ticketIds = [];
 
             for ($i = 0; $i < $validated['ticket_count']; $i++) {
-                // Tickets jadvaliga yozish
                 $ticket = Ticket::create([
                     'order_id' => $order->id,
                     'ticket_type_id' => $validated['ticket_type_id'],

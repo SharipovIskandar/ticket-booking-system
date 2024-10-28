@@ -38,6 +38,5 @@ Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('eve
 
 Route::get('/buy-ticket/group', [TicketPurchaseController::class, 'showGroupTicketSelection'])->name('buy-ticket.group');
 Route::post('/buy-ticket/group/confirm', [TicketPurchaseController::class, 'confirmGroupPurchase'])->name('buy-ticket.group.confirm');
-Route::get('/select-ticket', [TicketPurchaseController::class, 'showTicketSelection'])->name('buy-ticket.select');
-Route::post('/confirm-purchase', [TicketPurchaseController::class, 'confirmPurchase'])->name('buy-ticket.confirm');
+Route::get('/buy-ticket', [TicketPurchaseController::class, 'showTicketSelection'])->name('buy-ticket.select');
 Route::post('/complete-purchase', [TicketPurchaseController::class, 'completePurchase'])->name('buy-ticket.purchase');

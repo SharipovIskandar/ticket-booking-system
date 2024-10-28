@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\Ticket;
 use App\Models\TicketType;
 use Illuminate\Http\Request;
 
@@ -10,9 +11,10 @@ class TicketController extends Controller
 {
     public function index()
     {
+        $tickets = Ticket::all();
         $events = Event::all();
         $ticketTypes = TicketType::all();
-        return view('tickets.index', compact('events', 'ticketTypes'));
+        return view('tickets.index', compact('events', 'ticketTypes', 'tickets'));
     }
 
     public function purchase(Request $request)
@@ -24,7 +26,6 @@ class TicketController extends Controller
             'email' => 'required|email',
         ]);
 
-        // Bu yerda tranzaktsiyani bajarish va buyurtma va biletlarni saqlash lozim
 
         return redirect()->back()->with('success', 'Билет успешно куплен!');
     }
