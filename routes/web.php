@@ -10,6 +10,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::get('/buy-ticket/group', [TicketPurchaseController::class, 'showGroupTicketSelection'])->name('buy-ticket.group');
+Route::post('/buy-ticket/group/confirm', [TicketPurchaseController::class, 'confirmGroupPurchase'])->name('buy-ticket.group.confirm');
+Route::get('/buy-ticket', [TicketPurchaseController::class, 'showTicketSelection'])->name('buy-ticket.select');
+Route::post('/complete-purchase', [TicketPurchaseController::class, 'completePurchase'])->name('buy-ticket.purchase');
+
 
 Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
 Route::get('orders/create', [OrderController::class, 'create'])->name('orders.create');
@@ -36,7 +41,3 @@ Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('even
 Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
 Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
 
-Route::get('/buy-ticket/group', [TicketPurchaseController::class, 'showGroupTicketSelection'])->name('buy-ticket.group');
-Route::post('/buy-ticket/group/confirm', [TicketPurchaseController::class, 'confirmGroupPurchase'])->name('buy-ticket.group.confirm');
-Route::get('/buy-ticket', [TicketPurchaseController::class, 'showTicketSelection'])->name('buy-ticket.select');
-Route::post('/complete-purchase', [TicketPurchaseController::class, 'completePurchase'])->name('buy-ticket.purchase');
