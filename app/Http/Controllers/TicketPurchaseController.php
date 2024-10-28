@@ -22,13 +22,13 @@ class TicketPurchaseController extends Controller
         return view('tickets.group-ticket-selection', compact('events', 'ticketTypes'));
     }
 
-
     public function showTicketSelection()
     {
         $events = Event::all();
         $ticketTypes = TicketType::all();
         return view('tickets.select-ticket', compact('events', 'ticketTypes'));
     }
+
     public function completePurchase(Request $request)
     {
         $validated = $request->validate([
@@ -89,8 +89,6 @@ class TicketPurchaseController extends Controller
             return redirect()->route('buy-ticket.select')->with('error', 'Ошибка при покупке билета.');
         }
     }
-
-
 
     public function confirmGroupPurchase(Request $request)
     {
@@ -153,5 +151,4 @@ class TicketPurchaseController extends Controller
             return redirect()->route('buy-ticket.group')->with('error', 'Ошибка при покупке билета.');
         }
     }
-
 }

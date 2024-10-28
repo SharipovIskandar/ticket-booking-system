@@ -1,40 +1,52 @@
 @extends('layouts.app')
 
-@section('title', 'Покупка билета')
-
 @section('content')
-<h1>Покупка билета</h1>
+    <div class="container">
+        <h1>Выбор билета</h1>
 
-@if(session('success'))
-<p style="color: green;">{{ session('success') }}</p>
-@endif
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
 
-@if(session('error'))
-<p style="color: red;">{{ session('error') }}</p>
-@endif
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
 
-<form action="{{ route('buy-ticket.purchase') }}" method="POST">
-    @csrf
-    <label for="event_id">Мероприятие:</label>
-    <select name="event_id" required>
-        @foreach($events as $event)
-        <option value="{{ $event->id }}">{{ $event->name }}</option>
-        @endforeach
-    </select>
+        <form action="{{ route('complete-purchase') }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <label for="event_id">Выберите событие:</label>
+                <select id="event_id" name="event_id" class="form-control" required>
+                    @foreach($events as $event)
+                        <option value="{{ $event->id }}">{{ $event->name }}</option>
+                    @endforeach
+                </select>
+            </div>
 
-    <label for="ticket_type_id">Тип билета:</label>
-    <select name="ticket_type_id" required>
-        @foreach($ticketTypes as $type)
-        <option value="{{ $type->id }}">{{ $type->name }} ({{ $type->price }} сум)</option>
-        @endforeach
-    </select>
+            <div class="form-group">
+                <label for="ticket_type_id">Тип билета:</label>
+                <select id="ticket_type_id" name="ticket_type_id" class="form-control" required>
+                    @foreach($ticketTypes as $type)
+                        <option value="{{ $type->id }}">{{ $type->name }} - {{ $type->price }}₽</option>
+                    @endforeach
+                </select>
+            </div>
 
-    <label for="name">Имя и Фамилия:</label>
-    <input type="text" name="name" required>
+            <div class="form-group">
+                <label for="ticket_count">Количество билетов:</label>
+                <input type="number" id="ticket_count" name="ticket_count" class="form-control" min="1" required>
+            </div>
 
-    <label for="email">Электронная почта:</label>
-    <input type="email" name="email" required>
+            <div class="form-group">
+                <label for="email">Электронная почта:</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
 
-    <button type="submit">Купить билет</button>
-</form>
+            <button type="submit" class="btn btn-primary">Купить билет</button>
+        </form>
+    </div>
 @endsection

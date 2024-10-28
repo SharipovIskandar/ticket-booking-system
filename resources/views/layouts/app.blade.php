@@ -25,12 +25,8 @@
     <nav class="bg-blue-600 p-4 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
             <a href="{{ route('tickets.index') }}" class="header-title">Билеты</a>
-        </div>
-        <div class="container mx-auto flex justify-between items-center">
             <a href="{{ route('buy-ticket.group') }}" class="header-title">buy ticket for group</a>
-        </div>
-        <div class="container mx-auto flex justify-between items-center">
-        <a href="{{ route('buy-ticket.select') }}" class="header-title">buy ticket</a>
+            <a href="{{ route('buy-ticket.select') }}" class="header-title">buy ticket</a>
         </div>
     </nav>
 </header>
