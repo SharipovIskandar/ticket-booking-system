@@ -6,7 +6,7 @@
 
     <div class="bg-white p-6 rounded shadow">
         <p><strong>ID билета:</strong> {{ $ticket->id }}</p>
-        <p><strong>Штрих-код:</strong> {{ $barcode }}</p>
+        <p><strong>Штрих-код:</strong>{{"*********" . substr($barcode, -5) }}</p>
         <p><strong>ID типа билета:</strong> {{ $ticket->ticket_type_id }} ({{ $ticket->ticketType->name ?? 'Не указано' }})</p> <!-- Ticket type name -->
         <p><strong>Дата покупки:</strong> {{ $ticket->created_at }}</p>
         <p><strong>Использован:</strong> {{ $ticket->is_used ? 'Да' : 'Нет' }}</p>
