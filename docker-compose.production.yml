@@ -1,41 +1,40 @@
 services:
   web:
     container_name: web
-    image: nginx:alpine  # Nginx tasviridan foydalanish
+    image: nginx:alpine
     ports:
-      - "80:80"  # Xostda 80-portni ichki 80-portga xaritalash
+      - "80:80"
     volumes:
-      - ./:/var/www  # Laravel ilovasi katalogini o'rnatish
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf  # Nginx konfiguratsiyasi
+      - ./:/var/www
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
-      - ticket_booking-app  # Nginx PHP-FPM ishga tushishi uchun
+      - ticket_booking-app
     networks:
-      - online_store-network  # Maxsus tarmoqga ulanish
+      - online_store-network
 
   ticket_booking-app:
     container_name: ticket_booking-app
-    build: .  # Dockerfile'dan qurish
+    build: .
     depends_on:
       - ticket_db
     volumes:
-      - ./:/var/www  # Laravel ilovasi katalogini o'rnatish
+      - ./:/var/www
     networks:
-      - ticket_booking-network  # Maxsus tarmoqga ulanish
+      - online_store-network  # To'g'ridan to'g'ri tarmoqga ulanish
 
   ticket_db:
     container_name: ticket_db
-    image: mysql:8  # MySQL tasviridan foydalanish
+    image: mysql:8
     restart: always
     ports:
       - "3307:3306"
     environment:
-      MYSQL_DATABASE: ticket_db  # 'laravel' nomli ma'lumotlar bazasini yaratish
-      MYSQL_ROOT_PASSWORD: root  # MySQL uchun root parolni belgilash
+      MYSQL_DATABASE: ticket_db
+      MYSQL_ROOT_PASSWORD: root
     volumes:
-      - ./ticket_db:/var/lib/mysql  # MySQL uchun ma'lumotlarni saqlash
-
+      - ./ticket_db:/var/lib/mysql
     networks:
-      - online_store-network  # Maxsus tarmoqga ulanish
+      - online_store-network
 
   ticket_booking-node:
     container_name: ticket_booking-node
@@ -44,13 +43,11 @@ services:
     volumes:
       - ./:/var/www
     networks:
-      - ticket_booking-network
+      - online_store-network
     command: bash -c "npm install && npm run build"
 
 networks:
-  online_store-network:  # 'online_store-network' deb nomlangan maxsus tarmoq
-    driver: bridge
-  ticket_booking-network:  # 'ticket_booking-network' deb nomlangan maxsus tarmoq
+  online_store-network:
     driver: bridge
 
 volumes:
