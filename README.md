@@ -1,16 +1,25 @@
-# Система бронирования билетов
+# Ticket Booking System
 
-## Описание
-Система бронирования билетов — это веб-приложение на базе Laravel, которое позволяет пользователям заказывать билеты на мероприятия. Этот проект разработан с использованием фреймворка Laravel и базы данных MySQL.
+A simple and efficient ticket booking system built with Laravel. This application allows users to select and purchase tickets for various events.
 
-## Требования
-- PHP >= 7.3
-- Composer
-- MySQL
-- Laravel 8.x или выше
+## Features
 
-## Установка
+- User-friendly interface for selecting events and tickets
+- Individual ticket purchasing
+- Group ticket purchasing functionality
+- Real-time updates on ticket availability
+- Responsive design using TailwindCSS
+- User input validation
 
-1. **Клонировать репозиторий:**
+## Technologies Used
+
+- **Backend**: PHP, Laravel
+- **Frontend**: HTML, CSS, JavaScript, TailwindCSS
+- **Database**: MySQL
+- **Version Control**: Git
+
+## Installation
+
+1. Clone the repository:
    ```bash
-   git clone https://github.com/username/repo-name.git
+   git clone https://github.com/SharipovIskandar/ticket-booking-system.git
