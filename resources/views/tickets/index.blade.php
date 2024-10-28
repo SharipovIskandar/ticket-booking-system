@@ -17,12 +17,6 @@
             <li class="border-b border-gray-300 py-2">
                 ID билета: {{ $ticket->id }} - {{ $ticket->barcode }}
                 <a href="{{ route('tickets.show', $ticket->id) }}" class="text-blue-500 hover:underline">Просмотр</a>
-                <a href="{{ route('tickets.edit', $ticket->id) }}" class="text-yellow-500 hover:underline">Редактировать</a>
-                <form action="{{ route('tickets.destroy', $ticket->id) }}" method="POST" class="inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="text-red-500 hover:underline">Удалить</button>
-                </form>
             </li>
         @endforeach
     </ul>

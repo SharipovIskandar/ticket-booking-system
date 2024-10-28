@@ -24,4 +24,8 @@ class Ticket extends Model
     {
         return $this->belongsTo(TicketType::class);
     }
+    public function barcode()
+    {
+        return $this->belongsTo(TicketBarcode::class, 'barcode_id');
+    }
 }

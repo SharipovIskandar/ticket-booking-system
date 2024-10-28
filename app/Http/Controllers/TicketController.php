@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\BarcodeGenerator;
 use App\Models\Event;
+use App\Models\Order;
 use App\Models\Ticket;
+use App\Models\TicketBarcode;
 use App\Models\TicketType;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TicketController extends Controller
@@ -18,8 +22,13 @@ class TicketController extends Controller
     }
     public function show($id)
     {
-        $ticket = Ticket::findOrFail($id);
-        return view('tickets.show', compact('ticket'));
+        $ticket = Ticket::with('ticketType')->findOrFail($id);
+        $customerName = $ticket->customer_name;
+        $customerEmail = $ticket->customer_email;
+        $barcode = TicketBarcode::query()->where('ticket_id', $id)->first()->barcode;
+
+        return view('tickets.show', compact('ticket', 'customerName', 'customerEmail', 'barcode'));
+
     }
 
     public function purchase(Request $request)
