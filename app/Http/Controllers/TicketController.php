@@ -21,6 +21,7 @@ class TicketController extends Controller
         $ticket = Ticket::findOrFail($id);
         return view('tickets.show', compact('ticket'));
     }
+
     public function purchase(Request $request)
     {
         $request->validate([
