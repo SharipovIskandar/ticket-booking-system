@@ -6,7 +6,6 @@
     <title>@yield('title')</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        /* Qo'shimcha uslublar */
         .btn-primary {
             @apply bg-blue-500 text-white font-bold py-2 px-4 rounded shadow hover:bg-blue-600 transition duration-300;
         }
@@ -26,9 +25,12 @@
     <nav class="bg-blue-600 p-4 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
             <a href="{{ route('tickets.index') }}" class="header-title">Билеты</a>
-            <div>
-                <a href="{{ route('tickets.create') }}" class="btn-primary">Создать новый билет</a>
-            </div>
+        </div>
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="{{ route('buy-ticket.group') }}" class="header-title">buy ticket for group</a>
+        </div>
+        <div class="container mx-auto flex justify-between items-center">
+        <a href="{{ route('buy-ticket.select') }}" class="header-title">buy ticket</a>
         </div>
     </nav>
 </header>

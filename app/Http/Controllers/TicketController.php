@@ -16,7 +16,11 @@ class TicketController extends Controller
         $ticketTypes = TicketType::all();
         return view('tickets.index', compact('events', 'ticketTypes', 'tickets'));
     }
-
+    public function show($id)
+    {
+        $ticket = Ticket::findOrFail($id);
+        return view('tickets.show', compact('ticket'));
+    }
     public function purchase(Request $request)
     {
         $request->validate([
