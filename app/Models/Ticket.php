@@ -12,7 +12,7 @@ class Ticket extends Model
     protected $fillable = [
         'order_id',
         'ticket_type_id',
-        'barcode',
+        'is_used',
     ];
 
     public function order()

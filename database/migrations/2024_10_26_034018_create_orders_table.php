@@ -12,12 +12,15 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('event_id');
-            $table->decimal('total_amount', 8, 2);
-            $table->dateTime('order_date');
+            $table->unsignedBigInteger('ticket_type_id');
+            $table->integer('ticket_count');
+            $table->dateTime('order_date')->default(now());
+
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+            $table->foreign('ticket_type_id')->references('id')->on('ticket_types')->onDelete('cascade');
         });
     }
 
@@ -26,5 +29,6 @@ class CreateOrdersTable extends Migration
         Schema::dropIfExists('orders');
     }
 }
+
 
 

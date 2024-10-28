@@ -14,6 +14,7 @@ class CreateEventsTable extends Migration
             $table->text('description')->nullable();
             $table->dateTime('date');
             $table->string('location')->nullable();
+            $table->unsignedInteger('ticket_count');
             $table->timestamps();
         });
     }

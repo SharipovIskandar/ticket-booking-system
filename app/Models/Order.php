@@ -9,20 +9,22 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'event_id',
-        'event_date',
-        'ticket_adult_price',
-        'ticket_adult_quantity',
-        'ticket_kid_price',
-        'ticket_kid_quantity',
-        'barcode',
-        'equal_price',
-    ];
+    protected $fillable = ['user_id', 'event_id', 'ticket_type_id'];
 
-    public function tickets()
+    public function user()
     {
-        return $this->hasMany(Ticket::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
+
+    public function ticketType()
+    {
+        return $this->belongsTo(TicketType::class);
     }
 }
+
 

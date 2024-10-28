@@ -4,6 +4,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\TicketPurchaseController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -34,3 +35,9 @@ Route::post('/events', [EventController::class, 'store'])->name('events.store');
 Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
 Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
 Route::delete('/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
+
+Route::get('/buy-ticket/group', [TicketPurchaseController::class, 'showGroupTicketSelection'])->name('buy-ticket.group');
+Route::post('/buy-ticket/group/confirm', [TicketPurchaseController::class, 'confirmGroupPurchase'])->name('buy-ticket.group.confirm');
+Route::get('/select-ticket', [TicketPurchaseController::class, 'showTicketSelection'])->name('buy-ticket.select');
+Route::post('/confirm-purchase', [TicketPurchaseController::class, 'confirmPurchase'])->name('buy-ticket.confirm');
+Route::post('/complete-purchase', [TicketPurchaseController::class, 'completePurchase'])->name('buy-ticket.purchase');

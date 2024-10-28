@@ -12,7 +12,6 @@ class CreateTicketsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('ticket_type_id');
-            $table->string('barcode')->unique();
             $table->boolean('is_used')->default(false);
             $table->timestamps();
 
