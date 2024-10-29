@@ -27,7 +27,7 @@ Ticket Booking System — это система бронирования бил�
    ```bash
    git clone https://github.com/SharipovIskandar/ticket-booking-system.git
    cd ticket-booking-system
-  ```
+  
 ## Установка зависимостей:
 
    ```bash
