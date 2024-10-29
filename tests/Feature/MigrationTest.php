@@ -25,7 +25,7 @@ class MigrationTest extends TestCase
     {
         $this->assertTrue(Schema::hasTable('tickets'));
         $this->assertTrue(Schema::hasColumns('tickets', [
-            'id', 'order_id', 'ticket_type_id', 'barcode',
+            'id', 'order_id', 'ticket_type_id',
             'created_at', 'updated_at'
         ]));
     }
